@@ -99,8 +99,7 @@ indct = unique(indct);
 f_features = ano_features;
 f_features(:,indct) = [];
 indc(indct) = [];
-remov_feat = [5,6,7,10,12,33,42,43,45,47,48,49,50,51,52,55,56,59];
-f_features(:,remov_feat) = [];
+
 %% pain
 Wp_class = zeros(length(W_total),1);
 for i = 1:length(W_total)
@@ -112,7 +111,14 @@ for i = 1:length(W_total)
         Wp_class(i) = 2;
     end
 end
-indc_pain = [10,14,20,31,33,34,36,37,39,40];
+indc_pain = [];
+
+for i = 1:length(p_vals)
+    if p_vals(i) < 0.001
+        indc_pain = [indc_pain; i];
+    end
+end
+
 pain_features = f_features(:,indc_pain);
 
 
@@ -128,7 +134,13 @@ for i = 1:length(W_total)
     end
 end
 
-indc_stiff = [3,4,5,6,7,14,31,32,33,34,35,36,37,38,39,40];
+indc_stiff = [];
+for i = 1:length(p_vals)
+    if p_vals(i) < 0.001
+        indc_stiff = [indc_stiff; i];
+    end
+end
+
 stiff_features = f_features(:,indc_stiff);
 
 
@@ -145,8 +157,14 @@ for i = 1:length(W_total)
     end
 end
 
-indc_pf = 1:44;
-indc_pf(23) = [];
+indc_pf = [];
+for i = 1:length(p_vals)
+    if p_vals(i) < 0.001
+        indc_pf = [indc_pf; i];
+    end
+end
+
 pf_features = f_features(:,indc_pf);
+
 
 
