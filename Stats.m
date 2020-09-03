@@ -12,7 +12,7 @@ W_total = right_features(:,1087);
 
 
 W_class = zeros(length(W_total),1);
-% W_class = [];
+
 for i = 1:length(W_total)
     if W_total(i) <37
         W_class(i) = 0;
